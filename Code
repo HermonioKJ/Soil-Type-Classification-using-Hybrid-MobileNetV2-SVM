@@ -1,0 +1,8 @@
+import zipfile
+import os
+
+file = 'new.zip'
+
+with zipfile.ZipFile(file, 'r') as zip_ref:
+    zip_ref.extractall('./')
+os.remove(file)
