@@ -1,4 +1,4 @@
-//Extracting zip file
+#Extracting zip file
 import zipfile
 import os
 
@@ -8,7 +8,7 @@ with zipfile.ZipFile(file, 'r') as zip_ref:
     zip_ref.extractall('./')
 os.remove(file)
 
-//Model Training
+#Model Training
 import os
 import numpy as np
 from sklearn import svm
@@ -38,7 +38,7 @@ def extract_features(image_path):
 
 features = []
 labels = []
-//Data augmentation
+#Data augmentation
 data_augmentation = ImageDataGenerator(
     rotation_range=20, 
     width_shift_range=0.2,  
@@ -67,7 +67,7 @@ for class_folder in os.listdir(dataset_dir):
                 augmented_image_features = np.reshape(augmented_image_features, (augmented_image_features.shape[0], -1))
                 features.append(augmented_image_features)
                 labels.append(class_folder)
-                if i == 10: //Number of copies each image will be augmented
+                if i == 10: #Number of copies each image will be augmented
                     break
 
 X = np.concatenate(features)
@@ -87,7 +87,7 @@ plant_clay = ["Vegetables: Broccoli, Cauliflower, Kale, Peas, Potatoes, Cabbage,
 plant_sand = ["Commercially Cultivated Plants: Collard Greens, Tomatoes, Melons, Squash, Strawberries, Sugarbeet, Lettuce, And Peppers", "Maize", "Millet", "Barley", "Root Vegetables: Potatoes, Parsnips, And Carrots", "Shrubs And Bulbs: Tulips, Tree Mallow, Sun Roses, And Hibiscus", "Herbs Native To Mediterranean Climates: Oregano, Rosemary, And Lavender."]
 plant_silt = ["Most Vegetables", "Climbing Plants", "Perennials", "Grasses", "Shrubs", "Trees: Including Willow, Birch, And Dogwood."]
 
-//Validating model
+#Validating model
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
@@ -100,7 +100,7 @@ print("Accuracy:", accuracy)
 
 from sklearn.model_selection import cross_val_score
 
-//K-cross validation
+#K-cross validation
 k = 5 
 scores = cross_val_score(classifier, X, y, cv=k)
 
@@ -110,7 +110,7 @@ for fold, score in enumerate(scores):
 mean_accuracy = np.mean(scores)
 print(f"Mean Accuracy: {mean_accuracy}")
 
-//Confusion Matrix
+#Confusion Matrix
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
@@ -127,7 +127,7 @@ plt.ylabel('True')
 plt.title('Confusion Matrix')
 plt.show()
 
-//Test with your own image
+#Test with your own image
 test_image_path = 'loamm.jpg' //Image you want to test it with 
 test_features = extract_features(test_image_path)
 prediction_probs = classifier.predict_proba(test_features)
@@ -160,7 +160,7 @@ if predicted_label == "silt":
   for i, plant in enumerate(plant_silt,1):
     print(f"{i}.{plant}")
 
-//Run it using anvil
+#Run it using anvil
 pip install anvil-uplink
 
 import anvil.server
